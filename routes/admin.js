@@ -2,19 +2,14 @@ const path = require("path");
 
 const express = require("express");
 
-const rootDir = require("../util/path");
+const transfersController = require('../controllers/transfers');
 
 const router = express.Router();
 
 // /admin/add-transfer => GET
-router.get("/add-transfer", (req, res, next) => {
-  res.sendFile(path.join(rootDir, "views", "add-transfer.html"));
-});
+router.get("/add-transfer", transfersController.getAddTransfer);
 
 // /admin/add-transfer => POST
-router.post("/add-transfer", (req, res, next) => {
-  console.log(req.body);
-  res.redirect("/");
-});
+router.post("/add-transfer", transfersController.postAddTransfer);
 
 module.exports = router;
