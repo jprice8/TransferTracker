@@ -8,11 +8,16 @@ exports.getAddTransfer = (req, res, next) => {
 };
 
 exports.postAddTransfer = (req, res, next) => {
+  const date = req.body.date;
   const facility = req.body.facility;
+  const requester = req.body.requester;
   const imms = req.body.imms;
   const description = req.body.description;
   const quantity = req.body.quantity;
-  const transfer = new Transfer(facility, imms, description, quantity);
+  const uom = req.body.uom;
+  const filledBy = req.body.filledBy;
+  const trackingNum = req.body.trackingNum;
+  const transfer = new Transfer(date, facility, requester, imms, description, quantity, uom, filledBy, trackingNum);
   transfer.save();
   res.redirect("/");
 };

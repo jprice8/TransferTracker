@@ -1,5 +1,6 @@
 <%- include('includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/products.css">
+    <link rel="stylesheet" href="/css/tables.css">
 </head>
 
 <body>
@@ -7,24 +8,29 @@
 
     <main>
         <% if (trans.length > 0) { %>
-            <div class="grid">
+            <div class="scrollit">
+            <table>
+                <tr>
+                    <th>Date</th><th>Facility</th><th>Requester</th><th>IMMS #</th><th>Description</th><th>Quantity</th><th>UOM</th><th>Filled By</th><th>Tracking Number</th>
+                </tr>
+
                 <% for (let transfers of trans) { %>
-                    <article class="card product-item">
-                        <header class="card__header">
-                            <h1 class="product__title"><%= transfers.facility %></h1>
-                        </header>
-                        <div class="card__content">
-                            <h2 class="product__price"><%= transfers.imms %></h2>
-                        </div>
-                        <div class="card__content">
-                            <h2 class="product__price"><%= transfers.quantity %></h2>
-                            <p class="product__description"><%= transfers.description %></p>
-                        </div>
-                    </article>
+                    <tr>
+                        <td><%= transfers.date %></td>
+                        <td><%= transfers.facility %></td>
+                        <td><%= transfers.requester %></td>
+                        <td><%= transfers.imms %></td>
+                        <td><%= transfers.description %></td>
+                        <td><%= transfers.quantity %></td>
+                        <td><%= transfers.uom %></td>
+                        <td><%= transfers.filledBy %></td>
+                        <td><%= transfers.trackingNum %></td>
+                    </tr>    
                 <% } %>
+            </table>
             </div>
         <% } else { %>
-            <h1>No Products Found!</h1>
+            <h1>No Transfers Found!</h1>
         <% } %>
     </main>
 <%- include('includes/end.ejs') %>

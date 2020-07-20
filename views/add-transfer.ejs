@@ -9,8 +9,16 @@
     <main>
         <form class="product-form" action="/admin/add-transfer" method="POST">
             <div class="form-control">
+                <label for="date">Request Date</label>
+                <input type="date" name="date" id="date">
+            </div>
+            <div class="form-control">
                 <label for="facility">Requesting Facility</label>
                 <input type="text" name="facility" id="facility">
+            </div>
+            <div class="form-control">
+                <label for="requester">Requester</label>
+                <input type="text" name="requester" id="requester">
             </div>
             <div class="form-control">
                 <label for="imms">Imms #</label>
@@ -23,6 +31,18 @@
             <div class="form-control">
                 <label for="quantity">Quantity</label>
                 <input type="number" name="quantity" id="quantity">
+            </div>
+            <div class="form-control">
+                <label for="uom">UOM</label>
+                <input type="text" name="uom" id="uom">
+            </div>
+            <div class="form-control">
+                <label for="filledBy">Filled By</label>
+                <input type="text" name="filledBy" id="filledBy">
+            </div>
+            <div class="form-control">
+                <label for="trackingNum">Tracking Number</label>
+                <input type="number" name="trackingNum" id="trackingNum">
             </div>
 
             <button class="btn" type="submit">Add Transfer</button>
