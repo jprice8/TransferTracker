@@ -8,7 +8,11 @@ exports.getAddTransfer = (req, res, next) => {
 };
 
 exports.postAddTransfer = (req, res, next) => {
-  const transfer = new Transfer(req.body.title);
+  const facility = req.body.facility;
+  const imms = req.body.imms;
+  const description = req.body.description;
+  const quantity = req.body.quantity;
+  const transfer = new Transfer(facility, imms, description, quantity);
   transfer.save();
   res.redirect("/");
 };

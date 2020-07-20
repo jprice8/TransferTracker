@@ -2,8 +2,11 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = class Transfer {
-  constructor(t) {
-    this.title = t;
+  constructor(facility, imms, description, quantity) {
+    this.facility = facility;
+    this.imms = imms;
+    this.description = description;
+    this.quantity = quantity;
   }
 
   save() {
