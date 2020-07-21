@@ -1,0 +1,55 @@
+<%- include('includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('includes/navigation.ejs') %>
+
+    <main>
+        <!-- When form is submitted, it will call the action endpoint. Then firing the respective controller. -->
+        <form class="product-form" action="/admin/<% if (editing) { %>edit-transfer<% } else { %>add-transfer<% } %>" method="POST">
+            <div class="form-control">
+                <label for="date">Request Date</label>
+                <input type="date" name="date" id="date" value="<% if (editing) { %><%= transfer.date %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="facility">Requesting Facility</label>
+                <input type="text" name="facility" id="facility" value="<% if (editing) { %><%= transfer.facility %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="requester">Requester</label>
+                <input type="text" name="requester" id="requester" value="<% if (editing) { %><%= transfer.requester %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="imms">Imms #</label>
+                <input type="text" name="imms" id="imms" value="<% if (editing) { %><%= transfer.imms %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" value="<% if (editing) { %><%= transfer.description %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" id="quantity" value="<% if (editing) { %><%= transfer.quantity %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="uom">UOM</label>
+                <input type="text" name="uom" id="uom" value="<% if (editing) { %><%= transfer.uom %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="filledBy">Filled By</label>
+                <input type="text" name="filledBy" id="filledBy" value="<% if (editing) { %><%= transfer.filledBy %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="trackingNum">Tracking Number</label>
+                <input type="number" name="trackingNum" id="trackingNum" value="<% if (editing) { %><%= transfer.trackingNum %><% } %>">
+            </div>
+            <% if (editing) { %>
+                <input type="hidden" value="<%= transfer.id %>" name="transferId">
+            <% } %>
+            <button class="btn" type="submit"><% if (editing) { %>Update Transfer<% } else { %>Add Transfer<% } %></button>
+        </form>
+    </main>
+
+<%- include('includes/end.ejs') %>

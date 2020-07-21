@@ -1,8 +1,25 @@
 const fs = require("fs");
 const path = require("path");
 
+const p = path.join(
+  path.dirname(process.mainModule.filename),
+  'data',
+  'transfers.json'  
+);
+
+const getTransfersFromFile = cb => {
+  fs.readFile(p, (err, fileContent) => {
+    if (err) {
+      cb([]);
+    } else {
+      cb(JSON.parse(fileContent));
+    }
+  });
+};
+
 module.exports = class Transfer {
-  constructor(date, facility, requester, imms, description, quantity, uom, filledBy, trackingNum) {
+  constructor(id, date, facility, requester, imms, description, quantity, uom, filledBy, trackingNum) {
+    this.id = id;
     this.date = date;
     this.facility = facility;
     this.requester = requester;
@@ -15,35 +32,32 @@ module.exports = class Transfer {
   }
 
   save() {
-    const p = path.join(
-        path.dirname(process.mainModule.filename),
-        'data',
-        'transferData.json'
-    );
-    fs.readFile(p, (err, fileContent) => {
-        let transfers = [];
-        if (!err) {
-            transfers = JSON.parse(fileContent);
-        }
-        transfers.push(this);
+    getTransfersFromFile(transfers => {
+      if (this.id) {
+        const existingTransferIndex = transfers.findIndex(trans => trans.id === this.id);
+        const updatedTransfers = [...transfers];
+        updatedTransfers[existingTransferIndex] = this;
+        fs.writeFile(p, JSON.stringify(updatedTransfers), (err) => {
+          console.log(err);
+      });
+      } else {
+      this.id = Math.random().toString();
+      transfers.push(this);
         fs.writeFile(p, JSON.stringify(transfers), (err) => {
             console.log(err);
         });
+      }
     });
-  }
+  };
 
   static fetchAll(cb) {
-    const p = path.join(
-        path.dirname(process.mainModule.filename),
-        'data',
-        'transferData.json'
-    );
-    
-    fs.readFile(p, (err, fileContent) => {
-        if (err) {
-            cb([]);
-        }
-        cb(JSON.parse(fileContent));
+    getTransfersFromFile(cb);
+  }
+
+  static findById(id, cb) {
+    getTransfersFromFile(transfers => {
+      const transfer = transfers.find(t => t.id === id);
+      cb(transfer);
     });
   }
 };
