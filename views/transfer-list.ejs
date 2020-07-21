@@ -8,27 +8,44 @@
 
     <main>
         <% if (trans.length > 0) { %>
-            <div class="scrollit">
-            <table>
-                <tr>
-                    <th>Date</th><th>Facility</th><th>Requester</th><th>IMMS #</th><th>Description</th><th>Quantity</th><th>UOM</th><th>Filled By</th><th>Tracking Number</th>
-                </tr>
-
+            
+            <table class="table sticky" width="100%">
+                <thead>  
+                    <tr class="gray">
+                        <th>Date</th>
+                        <th>Facility</th>
+                        <th>Requester</th>
+                        <th>IMMS #</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>UOM</th>
+                        <th>Filled By</th>
+                        <th>Tracking Number</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>  
                 <% for (let transfers of trans) { %>
-                    <tr>
-                        <td><%= transfers.date %></td>
-                        <td><%= transfers.facility %></td>
-                        <td><%= transfers.requester %></td>
-                        <td><%= transfers.imms %></td>
-                        <td><%= transfers.description %></td>
-                        <td><%= transfers.quantity %></td>
-                        <td><%= transfers.uom %></td>
-                        <td><%= transfers.filledBy %></td>
-                        <td><%= transfers.trackingNum %></td>
-                    </tr>    
+                    <div class="scrollit"></div>
+                    <tbody> 
+                        <tr>
+                            <td><%= transfers.date %></td>
+                            <td><%= transfers.facility %></td>
+                            <td><%= transfers.requester %></td>
+                            <td><%= transfers.imms %></td>
+                            <td><%= transfers.description %></td>
+                            <td><%= transfers.quantity %></td>
+                            <td><%= transfers.uom %></td>
+                            <td><%= transfers.filledBy %></td>
+                            <td><%= transfers.trackingNum %></td>
+                            <td><button>Edit</button></td>
+                            <td><button>Delete</button></td>
+                        </tr>
+                    </tbody>
+                    </div>      
                 <% } %>
             </table>
-            </div>
+            
         <% } else { %>
             <h1>No Transfers Found!</h1>
         <% } %>
