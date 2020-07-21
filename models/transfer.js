@@ -18,7 +18,7 @@ module.exports = class Transfer {
     const p = path.join(
         path.dirname(process.mainModule.filename),
         'data',
-        'transfers.json'
+        'transferData.json'
     );
     fs.readFile(p, (err, fileContent) => {
         let transfers = [];
@@ -36,7 +36,7 @@ module.exports = class Transfer {
     const p = path.join(
         path.dirname(process.mainModule.filename),
         'data',
-        'transfers.json'
+        'transferData.json'
     );
     
     fs.readFile(p, (err, fileContent) => {

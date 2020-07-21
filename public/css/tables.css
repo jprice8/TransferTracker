@@ -23,6 +23,6 @@ table {
 th {
     position: sticky;
     top: 0;
-    background-color: rgba(244, 243, 237, 0.983);
+    background-color: #eeeee9;
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
 }
