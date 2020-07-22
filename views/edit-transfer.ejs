@@ -11,13 +11,13 @@
         <form class="product-form" action="/admin/<% if (editing) { %>edit-transfer<% } else { %>add-transfer<% } %>" method="POST">
             <div class="form-control">
                 <label for="date">Request Date</label>
-                <input type="date" name="date" id="date" value="<% if (editing) { %><%= transfer.date %><% } %>">
+                <input type="text" name="date" id="date" value="<% if (editing) { %><%= transfer.date %><% } %>">
             </div>
             <div class="form-control">
                 <label for="facility">Requesting Facility</label>
                 <input type="text" name="facility" id="facility" value="<% if (editing) { %><%= transfer.facility %><% } %>">
             </div>
-            <div class="form-control">
+            <div class="form-control"> 
                 <label for="requester">Requester</label>
                 <input type="text" name="requester" id="requester" value="<% if (editing) { %><%= transfer.requester %><% } %>">
             </div>
@@ -30,8 +30,8 @@
                 <input type="text" name="description" id="description" value="<% if (editing) { %><%= transfer.description %><% } %>">
             </div>
             <div class="form-control">
-                <label for="quantity">Quantity</label>
-                <input type="number" name="quantity" id="quantity" value="<% if (editing) { %><%= transfer.quantity %><% } %>">
+                <label for="reqQty">Requested Quantity</label>
+                <input type="number" name="reqQty" id="reqQty" value="<% if (editing) { %><%= transfer.reqQty %><% } %>">
             </div>
             <div class="form-control">
                 <label for="uom">UOM</label>
@@ -40,6 +40,10 @@
             <div class="form-control">
                 <label for="filledBy">Filled By</label>
                 <input type="text" name="filledBy" id="filledBy" value="<% if (editing) { %><%= transfer.filledBy %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="shipQty">Shipped Quantity</label>
+                <input type="number" name="shipQty" id="shipQty" value="<% if (editing) { %><%= transfer.shipQty %><% } %>">
             </div>
             <div class="form-control">
                 <label for="trackingNum">Tracking Number</label>

@@ -1,74 +1,44 @@
-const fs = require("fs");
-const path = require("path");
+const Sequelize = require('sequelize');
+const sequelize = require('../util/database');
 
-const p = path.join(
-  path.dirname(process.mainModule.filename),
-  'data',
-  'transfers.json'  
-);
+const Transfer = sequelize.define('transfer', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  date: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  facility: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  requester: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  imms: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  reqQty: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  uom: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  filledBy: Sequelize.STRING,
+  shipQty: Sequelize.INTEGER,
+  trackingNum: Sequelize.STRING
+});
 
-const getTransfersFromFile = cb => {
-  fs.readFile(p, (err, fileContent) => {
-    if (err) {
-      cb([]);
-    } else {
-      cb(JSON.parse(fileContent));
-    }
-  });
-};
-
-module.exports = class Transfer {
-  constructor(id, date, facility, requester, imms, description, quantity, uom, filledBy, trackingNum) {
-    this.id = id;
-    this.date = date;
-    this.facility = facility;
-    this.requester = requester;
-    this.imms = imms;
-    this.description = description;
-    this.quantity = quantity;
-    this.uom = uom;
-    this.filledBy = filledBy;
-    this.trackingNum = trackingNum;
-  }
-
-  save() {
-    getTransfersFromFile(transfers => {
-      if (this.id) {
-        const existingTransIndex = transfers.findIndex(tran => tran.id === this.id);
-        const updatedTransfersList = [...transfers];
-        updatedTransfersList[existingTransIndex] = this;
-        console.log(JSON.stringify(updatedTransfersList));
-        console.log(updatedTransfersList);
-        fs.writeFile(p, JSON.stringify(updatedTransfersList), (err) => {
-          console.log(err);
-      });
-      } else {
-      this.id = Math.random().toString();
-      transfers.push(this);
-        fs.writeFile(p, JSON.stringify(transfers), (err) => {
-            console.log(err);
-        });
-      }
-    });
-  }
-
-  static deleteById(id) {
-    getTransfersFromFile(transfers => {
-      const filteredTransfers = transfers.filter(tran => tran.id !== id);
-      fs.writeFile(p, JSON.stringify(filteredTransfers), err => {
-        console.log(err);
-      });
-    });
-  }
-
-  static fetchAll(cb) {
-    getTransfersFromFile(cb);
-  }
-
-  static findById(id, cb) {
-    getTransfersFromFile(transfers => {
-      const transfer = transfers.find(t => t.id === id);
-      cb(transfer);
-    });
-  }
-};
+module.exports = Transfer;
