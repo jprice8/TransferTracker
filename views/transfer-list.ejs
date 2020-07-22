@@ -39,7 +39,11 @@
                             <td><%= transfers.filledBy %></td>
                             <td><%= transfers.trackingNum %></td>
                             <td><a href="/admin/edit-transfer/<%= transfers.id %>?edit=true" class="edit-btn">Edit</a></td>
-                            <td><a href="/admin/delete-transfer/<%= transfers.id %>" class="edit-btn">Delete</a></td>
+                            <form action="/admin/delete-transfer" method="POST">
+                                <input type="hidden" value="<%= transfers.id %>" name="transferId">
+                                <td><button class="edit-btn">Delete</button></td>
+                            </form>
+                            
                         </tr>
                     </tbody>
                     </div>      

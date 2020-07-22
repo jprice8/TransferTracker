@@ -19,4 +19,7 @@ router.get("/edit-transfer/:transferId", transfersController.getEditTransfer);
 // /admin/edit-transfer => POST
 router.post("/edit-transfer", transfersController.postEditTransfer);
 
+// /admin/delete-transfer =>
+router.post("/delete-transfer", transfersController.postDeleteTransfer); 
+
 module.exports = router;

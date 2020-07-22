@@ -48,7 +48,16 @@ module.exports = class Transfer {
         });
       }
     });
-  };
+  }
+
+  static deleteById(id) {
+    getTransfersFromFile(transfers => {
+      const filteredTransfers = transfers.filter(tran => tran.id !== id);
+      fs.writeFile(p, JSON.stringify(filteredTransfers), err => {
+        console.log(err);
+      });
+    });
+  }
 
   static fetchAll(cb) {
     getTransfersFromFile(cb);

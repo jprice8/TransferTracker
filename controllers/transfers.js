@@ -23,16 +23,6 @@ exports.postAddTransfer = (req, res, next) => {
   res.redirect("/");
 };
 
-exports.getTransfers = (req, res, next) => {
-  Transfer.fetchAll((transfers) => {
-    res.render("transfer-list", {
-      trans: transfers,
-      pageTitle: "Transfer List",
-      path: "/",
-    });
-  });
-};
-
 exports.getEditTransfer = (req, res, next) => {
   const editMode = req.query.edit;
   
@@ -73,4 +63,20 @@ exports.postEditTransfer = (req, res, next) => {
   );
   updatedTransfer.save();
   res.redirect('/');
-}
+};
+
+exports.getTransfers = (req, res, next) => {
+  Transfer.fetchAll((transfers) => {
+    res.render("transfer-list", {
+      trans: transfers,
+      pageTitle: "Transfer List",
+      path: "/",
+    });
+  });
+};
+
+exports.postDeleteTransfer = (req, res, next) => {
+  const tranId = req.body.transferId;
+  Transfer.deleteById(tranId);
+  res.redirect('/');
+};
