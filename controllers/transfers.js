@@ -43,6 +43,7 @@ exports.getEditTransfer = (req, res, next) => {
 exports.postEditTransfer = (req, res, next) => {
   const transId = req.body.transferId;
   const updatedDate = req.body.date;
+  const updatedFacility = req.body.facility;
   const updatedRequester = req.body.requester;
   const updatedImms = req.body.imms;
   const updatedDescription = req.body.description;
@@ -53,6 +54,7 @@ exports.postEditTransfer = (req, res, next) => {
   const updatedTransfer = new Transfer(
     transId,
     updatedDate,
+    updatedFacility,
     updatedRequester,
     updatedImms,
     updatedDescription,

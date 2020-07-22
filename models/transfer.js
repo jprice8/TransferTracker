@@ -34,10 +34,12 @@ module.exports = class Transfer {
   save() {
     getTransfersFromFile(transfers => {
       if (this.id) {
-        const existingTransferIndex = transfers.findIndex(trans => trans.id === this.id);
-        const updatedTransfers = [...transfers];
-        updatedTransfers[existingTransferIndex] = this;
-        fs.writeFile(p, JSON.stringify(updatedTransfers), (err) => {
+        const existingTransIndex = transfers.findIndex(tran => tran.id === this.id);
+        const updatedTransfersList = [...transfers];
+        updatedTransfersList[existingTransIndex] = this;
+        console.log(JSON.stringify(updatedTransfersList));
+        console.log(updatedTransfersList);
+        fs.writeFile(p, JSON.stringify(updatedTransfersList), (err) => {
           console.log(err);
       });
       } else {
